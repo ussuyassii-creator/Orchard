@@ -52,8 +52,8 @@ public final class OrchardCosmeticsScreen extends Screen {
             boolean active = i == selected;
             if (active) g.fill(left + 12, y - 5, left + rail - 12, y + 23, ACCENT);
             int color = active ? 0xFF21172B : TEXT;
-            g.drawString(font, Component.literal(cosmetics.get(i).badge), left + 24, y + 1, active ? 0xFF4B3266 : ACCENT_2, false);
-            g.drawString(font, Component.literal(cosmetics.get(i).name), left + 78, y + 1, color, false);
+            g.drawString(font, Component.literal(cosmetics.get(i).badge()), left + 24, y + 1, active ? 0xFF4B3266 : ACCENT_2, false);
+            g.drawString(font, Component.literal(cosmetics.get(i).name()), left + 78, y + 1, color, false);
         }
 
         int cx = left + rail + 28, cy = top + 80;
@@ -69,9 +69,9 @@ public final class OrchardCosmeticsScreen extends Screen {
 
         var item = cosmetics.get(selected);
         int infoX = left + shellW - right + 24, infoY = top + 84;
-        g.drawString(font, Component.literal(item.name), infoX, infoY, TEXT, false);
-        g.drawString(font, Component.literal(item.category.toUpperCase()), infoX, infoY + 22, ACCENT_2, false);
-        g.drawString(font, Component.literal(item.description), infoX, infoY + 52, MUTED, false);
+        g.drawString(font, Component.literal(item.name()), infoX, infoY, TEXT, false);
+        g.drawString(font, Component.literal(item.category().toUpperCase()), infoX, infoY + 22, ACCENT_2, false);
+        g.drawString(font, Component.literal(item.description()), infoX, infoY + 52, MUTED, false);
         g.drawString(font, Component.literal("LIVE TRIAL"), infoX, infoY + 94, ACCENT, false);
         g.fill(infoX, infoY + 112, left + shellW - 24, infoY + 150, PANEL_ALT);
         g.drawString(font, Component.literal(CosmeticState.previewing() != null && CosmeticState.previewing().equals(item.id()) ? "PREVIEWING" : "PREVIEW"), infoX + 16, infoY + 126, TEXT, false);
