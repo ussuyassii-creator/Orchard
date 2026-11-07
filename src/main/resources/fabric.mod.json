@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "id": "orchard",
+  "version": "${version}",
+  "name": "Orchard",
+  "description": "A premium, customizable client GUI foundation for Minecraft.",
+  "authors": ["Orchard Team"],
+  "contact": { "sources": "https://github.com/ussuyassii-creator/Orchard" },
+  "license": "All-Rights-Reserved",
+  "environment": "client",
+  "entrypoints": {
+    "client": ["io.orchard.client.OrchardClient"]
+  },
+  "depends": {
+    "fabricloader": ">=0.16.0",
+    "minecraft": "~1.21.11",
+    "java": ">=21",
+    "fabric-api": "*"
+  },
+  "suggests": {
+    "sodium": "*"
+  }
+}
