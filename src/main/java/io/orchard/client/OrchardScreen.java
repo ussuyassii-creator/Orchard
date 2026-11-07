@@ -16,7 +16,7 @@ public final class OrchardScreen extends Screen {
     );
 
     private final Screen parent;
-    private int selected = 0;
+    private int selected;
     private long openedAt;
 
     public OrchardScreen(Screen parent) {
@@ -74,7 +74,7 @@ public final class OrchardScreen extends Screen {
         else if (selected == 9) renderPlayerPreview(graphics, contentLeft, cardTop + 122);
         else renderEmptyState(graphics, contentLeft, cardTop + 122);
 
-        if (progress < 1.0f) graphics.fill(0, 0, width, height, ((int) ((1.0f - progress) * 70) << 24));
+        if (progress < 1.0f) graphics.fill(0, 0, width, height, (int) ((1.0f - progress) * 70) << 24);
         super.render(graphics, mouseX, mouseY, delta);
     }
 
@@ -106,8 +106,8 @@ public final class OrchardScreen extends Screen {
     }
 
     private void drawPattern(GuiGraphics graphics, int width, int height) {
-        for (int x = 0; x < width; x += 32) graphics.fill(x, 0, x + 1, height, 0x081FFFFFF);
-        for (int y = 0; y < height; y += 32) graphics.fill(0, y, width, y + 1, 0x081FFFFFF);
+        for (int x = 0; x < width; x += 32) graphics.fill(x, 0, x + 1, height, 0x081FFFFF);
+        for (int y = 0; y < height; y += 32) graphics.fill(0, y, width, y + 1, 0x081FFFFF);
     }
 
     @Override
