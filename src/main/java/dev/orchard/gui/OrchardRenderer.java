@@ -26,6 +26,11 @@ public final class OrchardRenderer {
         ctx.fill(x + radius, y + 1, x + w - radius, y + 2, sheen);
     }
 
+    /** Public wrapper used by section buttons. */
+    public static void fillRoundedPublic(DrawContext ctx, int x, int y, int w, int h, int radius, int color) {
+        fillRounded(ctx, x, y, w, h, radius, color);
+    }
+
     /** Glass stroke border. */
     public static void drawGlassStroke(DrawContext ctx, int x, int y, int w, int h, int radius, int color) {
         // top & bottom edges
@@ -72,9 +77,5 @@ public final class OrchardRenderer {
             ctx.fill(x - i, y, x, y + h, c);
             ctx.fill(x + w, y, x + w + i, y + h, c);
         }
-    }
-
-    public static float animationDelta() {
-        return MinecraftClient.getInstance().getRenderTickCounter().getTickDelta(true);
     }
 }
