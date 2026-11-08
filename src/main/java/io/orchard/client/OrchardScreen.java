@@ -3,6 +3,8 @@ package io.orchard.client;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.input.KeyEvent;
+import net.minecraft.client.input.MouseButtonEvent;
 import net.minecraft.network.chat.Component;
 
 import java.util.List;
@@ -39,12 +41,12 @@ public final class OrchardScreen extends Screen {
             int y = itemTop + i * 35;
             boolean active = i == selected;
             if (active) graphics.fill(left + 10, y - 5, left + sidebar - 10, y + 24, OrchardConfig.accent);
-            graphics.drawString(font, Component.literal(SECTIONS.get(i).icon), left + 22, y + 2, active ? 0xFF241B2B : OrchardConfig.secondary, false);
-            graphics.drawString(font, Component.literal(SECTIONS.get(i).name), left + 48, y + 2, active ? 0xFF241B2B : OrchardConfig.text, false);
+            graphics.drawString(font, Component.literal(SECTIONS.get(i).icon()), left + 22, y + 2, active ? 0xFF241B2B : OrchardConfig.secondary, false);
+            graphics.drawString(font, Component.literal(SECTIONS.get(i).name()), left + 48, y + 2, active ? 0xFF241B2B : OrchardConfig.text, false);
         }
         int contentLeft = left + sidebar + 30, contentTop = top + 28;
-        graphics.drawString(font, Component.literal(SECTIONS.get(selected).name), contentLeft, contentTop, OrchardConfig.text, false);
-        graphics.drawString(font, Component.literal("ORCHARD / " + SECTIONS.get(selected).name.toUpperCase()), contentLeft, contentTop + 22, OrchardConfig.muted, false);
+        graphics.drawString(font, Component.literal(SECTIONS.get(selected).name()), contentLeft, contentTop, OrchardConfig.text, false);
+        graphics.drawString(font, Component.literal("ORCHARD / " + SECTIONS.get(selected).name().toUpperCase()), contentLeft, contentTop + 22, OrchardConfig.muted, false);
         int cardTop = contentTop + 58;
         graphics.fill(contentLeft, cardTop, left + panelWidth - 28, cardTop + 92, 0xA62E2540);
         graphics.drawString(font, Component.literal("This section is ready for your modules."), contentLeft + 18, cardTop + 24, OrchardConfig.text, false);
@@ -84,16 +86,17 @@ public final class OrchardScreen extends Screen {
         for (int x = 0; x < width; x += 32) g.fill(x, 0, x + 1, height, 0x081FFFFF);
         for (int y = 0; y < height; y += 32) g.fill(0, y, width, y + 1, 0x081FFFFF);
     }
-    @Override public boolean mouseClicked(double mouseX, double mouseY, int button) {
+    @Override public boolean mouseClicked(MouseButtonEvent event, boolean doubleClick) {
+        double mouseX = event.x(), mouseY = event.y();
         int panelWidth = Math.min(920, width - 48), panelHeight = Math.min(560, height - 48);
         int left = (width - panelWidth) / 2, top = (height - panelHeight) / 2, sidebar = Math.min(190, panelWidth / 4);
         int itemTop = top + 72;
         if (mouseX >= left + 10 && mouseX <= left + sidebar - 10) {
             for (int i = 0; i < SECTIONS.size(); i++) { int y = itemTop + i * 35; if (mouseY >= y - 5 && mouseY <= y + 24) { selected = i; return true; } }
         }
-        return super.mouseClicked(mouseX, mouseY, button);
+        return super.mouseClicked(event, doubleClick);
     }
-    @Override public boolean keyPressed(int keyCode, int scanCode, int modifiers) { if (keyCode == 256) { Minecraft.getInstance().setScreen(parent); return true; } return super.keyPressed(keyCode, scanCode, modifiers); }
+    @Override public boolean keyPressed(KeyEvent event) { return super.keyPressed(event); }
     @Override public void onClose() { Minecraft.getInstance().setScreen(parent); }
     private record Section(String icon, String name) { }
 }
