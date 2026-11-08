@@ -5,6 +5,8 @@ import io.orchard.client.cosmetics.CosmeticState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.input.KeyEvent;
+import net.minecraft.client.input.MouseButtonEvent;
 import net.minecraft.network.chat.Component;
 
 public final class OrchardCosmeticsScreen extends Screen {
@@ -86,7 +88,8 @@ public final class OrchardCosmeticsScreen extends Screen {
         if ((System.currentTimeMillis() - openedAt) < 180) g.fill(0, 0, w, h, 0x33120F1A);
     }
 
-    @Override public boolean mouseClicked(double mx, double my, int button) {
+    @Override public boolean mouseClicked(MouseButtonEvent event, boolean doubleClick) {
+        double mx = event.x(), my = event.y();
         int shellW = Math.min(1120, width - 36), shellH = Math.min(650, height - 30);
         int left = (width - shellW) / 2, top = (height - shellH) / 2, rail = 220, right = 280;
         int listTop = top + 78;
@@ -101,9 +104,9 @@ public final class OrchardCosmeticsScreen extends Screen {
             if (CosmeticState.isEquipped(id)) CosmeticState.unequip(id); else CosmeticState.equip(id);
             return true;
         }
-        return super.mouseClicked(mx, my, button);
+        return super.mouseClicked(event, doubleClick);
     }
 
-    @Override public boolean keyPressed(int keyCode, int scanCode, int modifiers) { if (keyCode == 256) { Minecraft.getInstance().setScreen(parent); return true; } return super.keyPressed(keyCode, scanCode, modifiers); }
+    @Override public boolean keyPressed(KeyEvent event) { return super.keyPressed(event); }
     @Override public void onClose() { Minecraft.getInstance().setScreen(parent); }
 }
