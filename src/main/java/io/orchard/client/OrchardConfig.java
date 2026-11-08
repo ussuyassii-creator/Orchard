@@ -14,10 +14,12 @@ public final class OrchardConfig {
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
     private static final Path FILE = FabricLoader.getInstance().getConfigDir().resolve("orchard.json");
 
-    public static int accent = 0xFFB7E4C7;
-    public static int background = 0xFF101416;
-    public static int panel = 0xE61B2225;
-    public static int text = 0xFFF3F7F4;
+    public static int accent = 0xFFD9B8FF;
+    public static int background = 0xFF120F1A;
+    public static int panel = 0xF0221D2E;
+    public static int text = 0xFFF7F1FF;
+    public static int muted = 0xFFB9A9C8;
+    public static int secondary = 0xFF9D7CFF;
     public static float blur = 0.45f;
     public static float scale = 1.0f;
     public static String pattern = "orchard";
@@ -33,6 +35,8 @@ public final class OrchardConfig {
             background = json.has("background") ? json.get("background").getAsInt() : background;
             panel = json.has("panel") ? json.get("panel").getAsInt() : panel;
             text = json.has("text") ? json.get("text").getAsInt() : text;
+            muted = json.has("muted") ? json.get("muted").getAsInt() : muted;
+            secondary = json.has("secondary") ? json.get("secondary").getAsInt() : secondary;
             blur = json.has("blur") ? json.get("blur").getAsFloat() : blur;
             scale = json.has("scale") ? json.get("scale").getAsFloat() : scale;
             pattern = json.has("pattern") ? json.get("pattern").getAsString() : pattern;
@@ -45,6 +49,8 @@ public final class OrchardConfig {
         json.addProperty("background", background);
         json.addProperty("panel", panel);
         json.addProperty("text", text);
+        json.addProperty("muted", muted);
+        json.addProperty("secondary", secondary);
         json.addProperty("blur", blur);
         json.addProperty("scale", scale);
         json.addProperty("pattern", pattern);
